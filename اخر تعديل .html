@@ -1,0 +1,960 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>منيو مطعم البرعصي للوجبات الشعبية والمشويات</title>
+    <!-- تحميل خط Cairo و Tajawal للغة العربية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- تحميل Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: '#FACC15',
+                        goldDark: '#CA8A04',
+                        fireOrange: '#F97316',
+                        fireRed: '#DC2626',
+                        darkBg: '#09090B',
+                        cardBg: '#121215'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #050505;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        /* تأثير الإطار الذهبي الفاخر للمنيو */
+        .royal-frame {
+            border: 2px solid #EAB308;
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.15), inset 0 0 20px rgba(234, 179, 8, 0.08);
+            background: radial-gradient(circle at top, #1a0b05 0%, #08080a 40%, #050505 85%, #180803 100%);
+        }
+        /* تأثير عناوين الأقسام الرئيسية مثل الصور */
+        .section-banner-title {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FCA5A5 45%, #DC2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 1px #FFFFFF);
+        }
+        /* شريط العنوان الفرعي البني/البرتقالي */
+        .sub-header-bar {
+            background: linear-gradient(90deg, rgba(120, 53, 15, 0.15) 0%, rgba(154, 52, 18, 0.55) 50%, rgba(120, 53, 15, 0.15) 100%);
+            border-top: 1px solid rgba(250, 204, 21, 0.35);
+            border-bottom: 1px solid rgba(250, 204, 21, 0.35);
+        }
+        /* شريط الإضافات المميز */
+        .addon-banner {
+            background: linear-gradient(90deg, rgba(30, 58, 138, 0.2) 0%, rgba(30, 64, 175, 0.65) 50%, rgba(30, 58, 138, 0.2) 100%);
+            border-top: 1px solid rgba(96, 165, 250, 0.4);
+            border-bottom: 1px solid rgba(96, 165, 250, 0.4);
+        }
+        /* شريط التمرير المخفي للتبويبات */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* توهج ناري خفيف في الأسفل والأعلى */
+        .fire-glow-top {
+            background: radial-gradient(ellipse at 50% 0%, rgba(234, 88, 12, 0.28) 0%, transparent 70%);
+        }
+        .fire-glow-bottom {
+            background: radial-gradient(ellipse at 50% 100%, rgba(220, 38, 38, 0.32) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-2 px-2 sm:py-6 sm:px-4">
+
+    <!-- الحاوية الرئيسية بإطار المنيو الذهبي -->
+    <div class="max-w-2xl mx-auto royal-frame rounded-2xl relative overflow-hidden pb-6">
+        
+        <!-- توهج ناري علوي وسفلي -->
+        <div class="absolute top-0 inset-x-0 h-40 fire-glow-top pointer-events-none"></div>
+        <div class="absolute bottom-0 inset-x-0 h-36 fire-glow-bottom pointer-events-none"></div>
+
+        <!-- زخارف الزوايا الذهبية الأربع (SVG) -->
+        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-gold absolute top-1 right-1 pointer-events-none opacity-90" viewBox="0 0 100 100" fill="none">
+            <path d="M95 5 H35 C20 5 15 15 25 22 C35 28 45 15 35 10 M95 5 V65 C95 80 85 85 78 75 C72 65 85 55 90 65 M85 15 C65 15 55 30 65 40 C72 47 82 37 75 30 M85 15 C85 35 70 45 60 35" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="52" cy="14" r="3" fill="currentColor"/>
+            <circle cx="86" cy="48" r="3" fill="currentColor"/>
+        </svg>
+        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-gold absolute top-1 left-1 pointer-events-none opacity-90 -scale-x-100" viewBox="0 0 100 100" fill="none">
+            <path d="M95 5 H35 C20 5 15 15 25 22 C35 28 45 15 35 10 M95 5 V65 C95 80 85 85 78 75 C72 65 85 55 90 65 M85 15 C65 15 55 30 65 40 C72 47 82 37 75 30 M85 15 C85 35 70 45 60 35" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="52" cy="14" r="3" fill="currentColor"/>
+            <circle cx="86" cy="48" r="3" fill="currentColor"/>
+        </svg>
+        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-gold absolute bottom-1 right-1 pointer-events-none opacity-90 -scale-y-100" viewBox="0 0 100 100" fill="none">
+            <path d="M95 5 H35 C20 5 15 15 25 22 C35 28 45 15 35 10 M95 5 V65 C95 80 85 85 78 75 C72 65 85 55 90 65 M85 15 C65 15 55 30 65 40 C72 47 82 37 75 30 M85 15 C85 35 70 45 60 35" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="52" cy="14" r="3" fill="currentColor"/>
+            <circle cx="86" cy="48" r="3" fill="currentColor"/>
+        </svg>
+        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-gold absolute bottom-1 left-1 pointer-events-none opacity-90 -scale-x-100 -scale-y-100" viewBox="0 0 100 100" fill="none">
+            <path d="M95 5 H35 C20 5 15 15 25 22 C35 28 45 15 35 10 M95 5 V65 C95 80 85 85 78 75 C72 65 85 55 90 65 M85 15 C65 15 55 30 65 40 C72 47 82 37 75 30 M85 15 C85 35 70 45 60 35" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="52" cy="14" r="3" fill="currentColor"/>
+            <circle cx="86" cy="48" r="3" fill="currentColor"/>
+        </svg>
+
+        <!-- ترويسة المطعم والشعار (مصممة بنصوص عربية حقيقية متصلة لضمان عدم تفكك الحروف على الآيفون والجوال) -->
+        <header class="relative z-10 pt-7 pb-4 px-4 text-center flex flex-col items-center">
+            
+            <!-- الشعار الرسمي لمطعم البرعصي -->
+            <div class="relative inline-flex flex-col items-center justify-center px-6 py-3 mb-2 select-none">
+                <!-- كلمة مطعم في الأعلى -->
+                <span class="text-lg sm:text-xl font-extrabold text-slate-200 tracking-wide -mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                    مطعم
+                </span>
+
+                <!-- السطر الرئيسي: الشوكة والملعقة + اسم البرعصي + طبق التقديم والبخار -->
+                <div class="flex items-center justify-center gap-2 sm:gap-3 my-1">
+                    <!-- أيقونة الشوكة والملعقة (يمين الاسم) -->
+                    <svg class="w-9 h-12 sm:w-11 sm:h-14 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] shrink-0" viewBox="0 0 48 64" fill="none">
+                        <!-- الشوكة -->
+                        <path d="M10 4V20M14 4V20M18 4V20M10 20C10 24 18 24 18 20M14 23V58" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- الملعقة -->
+                        <ellipse cx="33" cy="14" rx="6.5" ry="10" fill="currentColor"/>
+                        <path d="M33 24V58" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+                    </svg>
+
+                    <!-- اسم المطعم بخط عربي عريض متصل -->
+                    <h1 class="text-4xl sm:text-5xl font-black text-white tracking-normal drop-shadow-[0_4px_10px_rgba(0,0,0,0.95)]" style="text-shadow: 0 2px 12px rgba(255,255,255,0.2);">
+                        البرعصي
+                    </h1>
+
+                    <!-- أيقونة طبق التقديم المغطى مع البخار (يسار الاسم) -->
+                    <svg class="w-12 h-12 sm:w-14 sm:h-14 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] shrink-0" viewBox="0 0 64 64" fill="none">
+                        <!-- البخار المتصاعد -->
+                        <path d="M22 22C18 16 25 11 21 5" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M30 20C27 14 33 10 29 5" stroke="#CBD5E1" stroke-width="2.2" stroke-linecap="round"/>
+                        <!-- مقبض الغطاء -->
+                        <circle cx="34" cy="25" r="3" fill="currentColor"/>
+                        <!-- قبة الغطاء -->
+                        <path d="M14 42C16 29 52 29 54 42H14Z" fill="currentColor"/>
+                        <!-- خط جمالي داخل القبة -->
+                        <path d="M21 39C23 33 43 33 46 39" stroke="#09090B" stroke-width="2" stroke-linecap="round"/>
+                        <!-- قاعدة الصحن -->
+                        <path d="M8 46H60L55 50H13L8 46Z" fill="currentColor"/>
+                    </svg>
+                </div>
+
+                <!-- القوس الأحمر الانسيابي الفاخر -->
+                <svg class="w-64 sm:w-80 h-5 -mt-1 mb-1 drop-shadow-[0_2px_6px_rgba(220,38,38,0.6)]" viewBox="0 0 320 24" fill="none">
+                    <path d="M10 16C95 4 225 4 310 16C225 10 95 10 10 16Z" fill="url(#redArcGrad)" stroke="#EF4444" stroke-width="1.5"/>
+                    <defs>
+                        <linearGradient id="redArcGrad" x1="0" y1="0" x2="320" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#7F1D1D"/>
+                            <stop offset="50%" stop-color="#DC2626"/>
+                            <stop offset="100%" stop-color="#7F1D1D"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- الوصف أسفل القوس -->
+                <p class="text-sm sm:text-base font-extrabold text-gold tracking-wide drop-shadow">
+                    للوجبات الشعبية والمشويات
+                </p>
+            </div>
+
+            <!-- أزرار التفاعل السريعة (مشاركة الرابط + حالة الاتصال) -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-1">
+                <button onclick="copyMenuLink()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 border border-gold/40 text-gold text-xs font-bold transition shadow-md active:scale-95">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    <span>نسخ رابط المنيو لفيسبوك</span>
+                </button>
+                <span id="sync-badge" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    محدّث مباشرة
+                </span>
+            </div>
+        </header>
+
+        <!-- شريط أدوات المدير (يظهر فقط بعد تسجيل الدخول الصحيح) -->
+        <div id="admin-toolbar" class="hidden relative z-20 mx-3 sm:mx-5 mb-4 p-3 rounded-xl bg-gradient-to-r from-amber-950/90 via-zinc-900 to-amber-950/90 border border-gold shadow-lg">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-gold text-black text-xs font-black">وضع الإدارة</span>
+                    <span class="text-xs text-zinc-300">يمكنك التعديل والإضافة الآن</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <button onclick="openAddItemModal()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow">
+                        + إضافة صنف
+                    </button>
+                    <button onclick="openChangePinModal()" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-gold border border-gold/30 text-xs font-bold transition">
+                        تغيير كلمة المرور
+                    </button>
+                    <button onclick="logoutAdmin()" class="px-3 py-1.5 rounded-lg bg-red-900/80 hover:bg-red-800 text-red-200 text-xs font-bold transition">
+                        خروج
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- شريط البحث والتصفية السريعة -->
+        <div class="relative z-10 px-3 sm:px-5 mb-4 space-y-3">
+            <!-- حقل البحث -->
+            <div class="relative">
+                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="ابحث عن وجبة، مشاوي، شاورما، برجر..."
+                    class="w-full bg-zinc-900/90 border border-zinc-700/80 focus:border-gold rounded-xl py-2.5 pr-10 pl-4 text-sm text-white placeholder-zinc-400 focus:outline-none transition">
+                <svg class="w-4 h-4 text-gold absolute right-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+
+            <!-- تبويبات الأقسام -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="category-tabs">
+                <button onclick="filterCategory('all')" data-cat="all" class="cat-tab active shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gold text-black shadow-md transition">
+                    الكل
+                </button>
+                <button onclick="filterCategory('grills')" data-cat="grills" class="cat-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-gold/50 transition">
+                    🔥 الوجبات المشوية
+                </button>
+                <button onclick="filterCategory('traditional')" data-cat="traditional" class="cat-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-gold/50 transition">
+                    🍲 الوجبات الشعبية
+                </button>
+                <button onclick="filterCategory('sandwiches')" data-cat="sandwiches" class="cat-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-gold/50 transition">
+                    🍔 الساندويشات
+                </button>
+            </div>
+        </div>
+
+        <!-- حاوية عرض أصناف المنيو -->
+        <main id="menu-container" class="relative z-10 px-3 sm:px-5 space-y-6">
+            <!-- يتم توليد المحتوى ديناميكياً عبر JavaScript -->
+        </main>
+
+        <!-- تذييل المنيو وزر دخول الإدارة -->
+        <footer class="relative z-10 mt-8 pt-5 px-4 text-center border-t border-gold/20">
+            <p class="text-xs text-gold/80 font-bold mb-3">مطعم البرعصي للوجبات الشعبية والمشويات</p>
+            
+            <button id="admin-login-trigger" onclick="openLoginModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs text-zinc-500 hover:text-gold hover:bg-zinc-900/90 transition border border-zinc-800/80">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <span>دخول الإدارة</span>
+            </button>
+        </footer>
+    </div>
+
+    <!-- نافذة تسجيل دخول الإدارة (بدون أي تلميح لكلمة المرور) -->
+    <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+        <div class="bg-zinc-900 border-2 border-gold rounded-2xl w-full max-w-sm p-6 relative shadow-2xl">
+            <button onclick="closeModal('login-modal')" class="absolute top-3 left-3 text-zinc-400 hover:text-white p-1.5">✕</button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center mx-auto mb-2 text-gold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <h3 class="text-lg font-extrabold text-white">إدارة المنيو</h3>
+                <p class="text-xs text-zinc-400 mt-1">خاص بصاحب المطعم فقط</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <input type="password" id="pin-input" inputmode="numeric" maxlength="12" placeholder="أدخل كلمة المرور..." required
+                        class="w-full text-center text-base font-bold bg-black text-gold placeholder-zinc-500 border border-zinc-700 focus:border-gold rounded-xl py-3 px-4 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-fireRed to-fireOrange hover:opacity-95 text-white font-extrabold text-sm shadow-lg transition">
+                    تأكيد الدخول
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة أو تعديل صنف -->
+    <div id="item-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+        <div class="bg-zinc-900 border-2 border-gold rounded-2xl w-full max-w-md p-5 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('item-modal')" class="absolute top-3 left-3 text-zinc-400 hover:text-white p-1.5">✕</button>
+            <h3 id="item-modal-title" class="text-lg font-extrabold text-gold mb-4">إضافة صنف جديد</h3>
+            
+            <form onsubmit="saveMenuItem(event)" class="space-y-3.5">
+                <input type="hidden" id="edit-item-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-zinc-300 mb-1">القسم الفرعي</label>
+                    <select id="item-subcat" required class="w-full bg-black border border-zinc-700 focus:border-gold rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none">
+                        <!-- يتم تعبئتها تلقائياً -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-zinc-300 mb-1">اسم الصنف</label>
+                    <input type="text" id="item-name" required placeholder="مثال: كبدة حولي"
+                        class="w-full bg-black border border-zinc-700 focus:border-gold rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label id="price1-label" class="block text-xs font-bold text-zinc-300 mb-1">السعر الأساسي (د.ل)</label>
+                        <input type="number" step="0.5" id="item-price1" required placeholder="0"
+                            class="w-full bg-black border border-zinc-700 focus:border-gold rounded-xl py-2.5 px-3 text-sm text-gold font-bold focus:outline-none">
+                    </div>
+                    <div>
+                        <label id="price2-label" class="block text-xs font-bold text-zinc-300 mb-1">السعر الثاني (اختياري)</label>
+                        <input type="number" step="0.5" id="item-price2" placeholder="اتركه فارغاً إن لم يوجد"
+                            class="w-full bg-black border border-zinc-700 focus:border-gold rounded-xl py-2.5 px-3 text-sm text-fireOrange font-bold focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="checkbox" id="item-available" checked class="w-4 h-4 accent-gold rounded">
+                    <label for="item-available" class="text-xs font-bold text-zinc-300">الصنف متوفر حالياً</label>
+                </div>
+
+                <div class="pt-2 flex gap-2">
+                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm transition">
+                        حفظ التغييرات
+                    </button>
+                    <button type="button" onclick="closeModal('item-modal')" class="px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-sm transition">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة تغيير كلمة المرور -->
+    <div id="pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+        <div class="bg-zinc-900 border-2 border-gold rounded-2xl w-full max-w-sm p-5 relative shadow-2xl">
+            <button onclick="closeModal('pin-modal')" class="absolute top-3 left-3 text-zinc-400 hover:text-white p-1.5">✕</button>
+            <h3 class="text-base font-extrabold text-gold mb-3">تغيير كلمة مرور الإدارة</h3>
+            <form onsubmit="saveNewPin(event)" class="space-y-3">
+                <input type="password" id="new-pin-input" inputmode="numeric" minlength="4" maxlength="12" required placeholder="أدخل كلمة المرور الجديدة"
+                    class="w-full text-center font-bold bg-black border border-zinc-700 focus:border-gold rounded-xl py-2.5 px-3 text-white focus:outline-none">
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-gold text-black font-extrabold text-sm hover:bg-yellow-400 transition">
+                    حفظ كلمة المرور الجديدة
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- إشعار Toast مخصص بديل alert -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 border border-gold text-white text-xs font-bold shadow-2xl transition-all">
+        <span id="toast-msg"></span>
+    </div>
+
+    <!-- سكربت Firebase والمنطق البرمجي للتطبيق -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // البيانات الكاملة للمنيو المستخرجة بدقة من صور مطعم البرعصي
+        const DEFAULT_MENU_DATA = {
+            pin: "1234",
+            categories: [
+                {
+                    id: "grills",
+                    title: "الوجبات المشوية",
+                    subcategories: [
+                        {
+                            id: "grills_3skewers",
+                            title: "وجبات مشاوي 3 أسياخ",
+                            note: "الإضافة مع كل وجبة : رز + سلاطة + بطاطا + مايونيز",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "g1", name: "كبدة حولي", price1: 60, price2: null, available: true },
+                                { id: "g2", name: "شيش دجاج", price1: 35, price2: null, available: true },
+                                { id: "g3", name: "كبدة بالرداء", price1: 65, price2: null, available: true },
+                                { id: "g4", name: "كباب لحم", price1: 45, price2: null, available: true },
+                                { id: "g5", name: "لحم شقف", price1: 55, price2: null, available: true },
+                                { id: "g6", name: "مشكل 5 سيخ", price1: 65, price2: null, available: true }
+                            ]
+                        },
+                        {
+                            id: "grills_weight",
+                            title: "وجبات مشاوي بالميزان",
+                            note: "",
+                            columns: ["1 كجم", "½ كجم"],
+                            items: [
+                                { id: "gw1", name: "ريش لحم", price1: 150, price2: 75, available: true },
+                                { id: "gw2", name: "كلاوي حولي", price1: 140, price2: 70, available: true },
+                                { id: "gw3", name: "كبدة حولي", price1: 150, price2: 75, available: true },
+                                { id: "gw4", name: "شقف لحم", price1: 150, price2: 75, available: true },
+                                { id: "gw5", name: "كباب لحم", price1: 120, price2: 60, available: true },
+                                { id: "gw6", name: "شيش دجاج", price1: 100, price2: 50, available: true },
+                                { id: "gw7", name: "وجبة سمك مشوي", price1: 50, price2: null, available: true }
+                            ]
+                        },
+                        {
+                            id: "grills_chicken",
+                            title: "وجبات الدجاج والمقبلات",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "gc1", name: "دجاجة مشوية", price1: 50, price2: null, available: true },
+                                { id: "gc2", name: "نصف دجاجة مشوية", price1: 30, price2: null, available: true },
+                                { id: "gc3", name: "دجاجة محمرة", price1: 50, price2: null, available: true },
+                                { id: "gc4", name: "نصف دجاجة محمرة", price1: 30, price2: null, available: true },
+                                { id: "gc5", name: "بطاطا مقلية (صغير)", price1: 10, price2: null, available: true },
+                                { id: "gc6", name: "بطاطا مقلية (كبير)", price1: 20, price2: null, available: true },
+                               
+                                { id: "gc8", name: "سلاطة مشكلة (كبير)", price1: 20, price2: null, available: true },
+                                { id: "gc9", name: "وجبة سمك مشوي", price1: 50, price2: null, available: true }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "traditional",
+                    title: "الوجبات الشعبية",
+                    subcategories: [
+                        {
+                            id: "trad_meals",
+                            title: "أصناف الوجبات",
+                            note: "الإضافة مع كل وجبة : شربة + سلاطة + مصير + خبز",
+                            columns: ["لحم وطني", "دجاج"],
+                            items: [
+                                
+                                { id: "t2", name: "أرز بالبصلة", price1: 55, price2: 20, available: true },
+                                { id: "t3", name: "كسكسو بالخضرة", price1: 55, price2: 20, available: true },
+                                { id: "t4", name: "كسكسو بالبصلة", price1: 55, price2: 20, available: true },
+                                { id: "t5", name: "مكرونة اسبقيتي", price1: 55, price2: 20, available: true },
+                                { id: "t6", name: "مكرونة امبوخة", price1: 55, price2: 20, available: true },
+                                { id: "t7", name: "طاجين بطاطا", price1: 55, price2: 30, available: true },
+                                { id: "t8", name: "طاجين نصف راس", price1: 30, price2: null, available: true },
+                                { id: "t9", name: "وجبة راس حولي", price1: 50, price2: null, available: true }
+                            ]
+                        },
+                        {
+                            id: "trad_sides",
+                            title: "الإضافات والمقبلات الشعبية",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "ts1", name: "فاصوليا", price1: 8, price2: null, available: true },
+                                { id: "ts2", name: "بطاطا امبطنة", price1: 3, price2: null, available: true },
+                                { id: "ts3", name: "شربة عربية", price1: 8, price2: null, available: true },
+                                { id: "ts4", name: "عصبان وطني", price1: 8, price2: null, available: true },
+                                { id: "ts5", name: "شربة عدس", price1: 7, price2: null, available: true },
+                                { id: "ts6", name: "محشي", price1: 5, price2: null, available: true }
+                            ]
+                        },
+                        {
+                            id: "trad_mansaf",
+                            title: "منسف حولي",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "tm1", name: "منسف حولي (كامل)", price1: 1700, price2: null, available: true },
+                                { id: "tm2", name: "منسف حولي (نصف)", price1: 900, price2: null, available: true },
+                                { id: "tm3", name: "منسف حولي (ربع)", price1: 500, price2: null, available: true }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "sandwiches",
+                    title: "الساندويشات",
+                    subcategories: [
+                        {
+                            id: "sand_grill",
+                            title: "ساندويش قريل",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "sg1", name: "كبدة اسكندراني", price1: 12, price2: null, available: true },
+                                { id: "sg2", name: "مكسيكانو", price1: 10, price2: null, available: true },
+                               
+                                { id: "sg4", name: "فاهيتا دجاج", price1: 10, price2: null, available: true },
+                              
+                                { id: "sg6", name: "طابونة دجاج", price1: 10, price2: null, available: true }
+                            ]
+                        },
+                        {
+                            id: "sand_burger",
+                            title: "البرجر",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "sb1", name: "برجر لحم", price1: 11, price2: null, available: true },
+                                { id: "sb2", name: "برجر جامبو", price1: 15, price2: null, available: true },
+                                { id: "sb3", name: "برجر دجاج", price1: 8, price2: null, available: true },
+                                { id: "sb4", name: "برجر ماكس", price1: 15, price2: null, available: true },
+                                { id: "sb5", name: "برجر مشروم", price1: 12, price2: null, available: true },
+                              
+                                { id: "sb7", name: "برجر موزريلا", price1: 12, price2: null, available: true },
+                              
+                            ]
+                        },
+                        {
+                            id: "sand_charcoal",
+                            title: "ساندويش مشوي على الفحم",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "sc1", name: "كبدة وطني", price1: 15, price2: null, available: true },
+                                { id: "sc2", name: "لحم شقف", price1: 13, price2: null, available: true },
+                                { id: "sc3", name: "كباب لحم", price1: 10, price2: null, available: true },
+                                { id: "sc4", name: "شيش دجاج", price1: 8, price2: null, available: true },
+                                { id: "sc5", name: "برجر عالحطب", price1: 12, price2: null, available: true },
+                                { id: "sc6", name: "شيش البرعصي", price1: 14, price2: null, available: true }
+                            ]
+                        },
+                        {
+                            id: "sand_shawarma",
+                            title: "الشاورما",
+                            note: "",
+                            columns: ["السعر"],
+                            items: [
+                                { id: "ss1", name: "شاورما عادي", price1: 7, price2: null, available: true },
+                               
+                                { id: "ss3", name: "شاورما صاروخ", price1: 13, price2: null, available: true },
+                                { id: "ss4", name: "نص كيلو شاورما", price1: 50, price2: null, available: true },
+                                { id: "ss5", name: "شاورما اكسترا", price1: 12, price2: null, available: true },
+                                { id: "ss6", name: "كيلو شاورما", price1: 100, price2: null, available: true },
+                                { id: "ss7", name: "شاورما عربي", price1: 27, price2: null, available: true }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // حالة التطبيق
+        let menuState = JSON.parse(JSON.stringify(DEFAULT_MENU_DATA));
+        let isAdmin = false;
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'albarasi-menu-app';
+
+        // تهيئة Firebase والمزامنة السحابية
+        async function initCloudSync() {
+            try {
+                if (typeof __firebase_config === 'undefined') {
+                    renderMenu();
+                    return;
+                }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // المصادقة أولاً حسب القواعد الإلزامية
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (!user) return;
+                    currentUser = user;
+                    const menuDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'restaurant_menu', 'main_menu');
+
+                    // التحقق من وجود المستند أو إنشائه أول مرة
+                    try {
+                        const snap = await getDoc(menuDocRef);
+                        if (!snap.exists()) {
+                            await setDoc(menuDocRef, DEFAULT_MENU_DATA);
+                        }
+                    } catch (err) {
+                        console.error("Init doc error:", err);
+                    }
+
+                    // الاستماع المباشر للتحديثات الفورية
+                    onSnapshot(menuDocRef, async (docSnap) => {
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            if (data && data.categories) {
+                                // ترقية تلقائية لقسم الدجاج والمقبلات إذا كان لا يزال بالتنسيق القديم ذي العمودين
+                                const grillsCat = data.categories.find(c => c.id === 'grills');
+                                const chickenSub = grillsCat?.subcategories.find(s => s.id === 'grills_chicken');
+                                if (chickenSub && chickenSub.columns && chickenSub.columns.length > 1) {
+                                    const updatedChickenSub = DEFAULT_MENU_DATA.categories[0].subcategories[2];
+                                    Object.assign(chickenSub, JSON.parse(JSON.stringify(updatedChickenSub)));
+                                    await setDoc(menuDocRef, data);
+                                }
+                                menuState = data;
+                                renderMenu();
+                            }
+                        }
+                    }, (error) => {
+                        console.error("Snapshot error:", error);
+                    });
+                });
+            } catch (e) {
+                console.error("Firebase init failed:", e);
+                renderMenu();
+            }
+        }
+
+        // حفظ التغييرات في السحابة
+        async function persistMenuState() {
+            renderMenu();
+            if (!db || !currentUser) {
+                showToast("تم التحديث محلياً");
+                return;
+            }
+            try {
+                const menuDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'restaurant_menu', 'main_menu');
+                await setDoc(menuDocRef, menuState);
+                showToast("تم الحفظ ونشر التحديث للزبائن بنجاح");
+            } catch (err) {
+                console.error("Save error:", err);
+                showToast("حدث خطأ أثناء الحفظ السحابي");
+            }
+        }
+
+        // عرض المنيو في الواجهة
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+
+            const query = searchQuery.trim().toLowerCase();
+            let hasAnyResult = false;
+
+            menuState.categories.forEach(cat => {
+                if (currentCategory !== 'all' && cat.id !== currentCategory) return;
+
+                // تصفية الأقسام الفرعية والأصناف بناءً على البحث
+                const filteredSubcats = cat.subcategories.map(sub => {
+                    const matchedItems = sub.items.filter(item =>
+                        item.name.toLowerCase().includes(query) ||
+                        sub.title.toLowerCase().includes(query) ||
+                        cat.title.toLowerCase().includes(query)
+                    );
+                    return { ...sub, items: matchedItems };
+                }).filter(sub => sub.items.length > 0);
+
+                if (filteredSubcats.length === 0) return;
+                hasAnyResult = true;
+
+                const catSection = document.createElement('section');
+                catSection.className = "space-y-4 pt-2";
+
+                // عنوان القسم الرئيسي
+                let html = `
+                    <div class="text-center relative py-1">
+                        <h2 class="text-2xl sm:text-3xl font-black section-banner-title inline-block px-4">
+                            ${cat.title}
+                        </h2>
+                        <div class="h-0.5 w-32 mx-auto mt-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+                    </div>
+                `;
+
+                // عرض الأقسام الفرعية
+                filteredSubcats.forEach(sub => {
+                    const hasTwoCols = sub.columns && sub.columns.length > 1;
+                    html += `
+                        <div class="rounded-xl bg-zinc-950/80 border border-zinc-800/90 overflow-hidden shadow-lg">
+                            <!-- شريط عنوان القسم الفرعي -->
+                            <div class="sub-header-bar px-3.5 py-2 flex items-center justify-between">
+                                <h3 class="text-sm sm:text-base font-extrabold text-gold drop-shadow">
+                                    ${sub.title}
+                                </h3>
+                                ${hasTwoCols ? `
+                                    <div class="flex items-center gap-3 sm:gap-5 text-xs font-extrabold text-amber-200">
+                                        <span class="w-14 text-center">${sub.columns[0]}</span>
+                                        <span class="w-14 text-center">${sub.columns[1]}</span>
+                                    </div>
+                                ` : `
+                                    <span class="text-xs font-bold text-amber-200/80 pl-2">د.ل</span>
+                                `}
+                            </div>
+
+                            <!-- قائمة الأصناف -->
+                            <div class="divide-y divide-zinc-800/60">
+                                ${sub.items.map(item => `
+                                    <div class="px-3.5 py-2.5 flex items-center justify-between gap-2 hover:bg-zinc-900/60 transition ${!item.available ? 'opacity-50' : ''}">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center gap-2 flex-wrap">
+                                                <span class="text-sm sm:text-base font-bold text-amber-400 ${!item.available ? 'line-through text-zinc-400' : ''}">
+                                                    ${item.name}
+                                                </span>
+                                                ${!item.available ? `<span class="text-[10px] px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800 font-bold">نفدت الكمية</span>` : ''}
+                                            </div>
+                                        </div>
+
+                                        <!-- الأسعار -->
+                                        <div class="flex items-center gap-3 sm:gap-5 shrink-0">
+                                            ${hasTwoCols ? `
+                                                <span class="w-14 text-center text-base sm:text-lg font-black text-fireOrange">${item.price1}</span>
+                                                <span class="w-14 text-center text-base sm:text-lg font-black text-gold">${item.price2 !== null && item.price2 !== '' ? item.price2 : '-'}</span>
+                                            ` : `
+                                                <span class="min-w-[3.2rem] text-center text-base sm:text-lg font-black text-fireOrange bg-black/50 px-2.5 py-0.5 rounded-lg border border-zinc-800">
+                                                    ${item.price1}
+                                                </span>
+                                            `}
+                                        </div>
+
+                                        <!-- أزرار التحكم للمدير فقط -->
+                                        ${isAdmin ? `
+                                            <div class="flex items-center gap-1 mr-1 border-r border-zinc-800 pr-2">
+                                                <button onclick="toggleItemAvailability('${cat.id}', '${sub.id}', '${item.id}')" title="تبديل التوفر"
+                                                    class="p-1.5 rounded-lg ${item.available ? 'bg-emerald-950 text-emerald-400' : 'bg-zinc-800 text-zinc-400'} hover:opacity-80 text-xs">
+                                                    ${item.available ? '✓' : '✕'}
+                                                </button>
+                                                <button onclick="openEditItemModal('${cat.id}', '${sub.id}', '${item.id}')" title="تعديل"
+                                                    class="p-1.5 rounded-lg bg-amber-950 text-gold hover:bg-amber-900 text-xs">
+                                                    ✎
+                                                </button>
+                                                <button onclick="deleteMenuItem('${cat.id}', '${sub.id}', '${item.id}')" title="حذف"
+                                                    class="p-1.5 rounded-lg bg-red-950 text-red-400 hover:bg-red-900 text-xs">
+                                                    🗑
+                                                </button>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <!-- ملاحظة الإضافات إن وجدت -->
+                            ${sub.note ? `
+                                <div class="addon-banner px-3 py-2 text-center text-xs sm:text-sm font-bold text-white">
+                                    ${sub.note}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+
+                catSection.innerHTML = html;
+                container.appendChild(catSection);
+            });
+
+            if (!hasAnyResult) {
+                container.innerHTML = `
+                    <div class="text-center py-12 px-4 rounded-2xl bg-zinc-900/60 border border-zinc-800">
+                        <p class="text-gold font-bold text-base mb-1">لا توجد أصناف مطابقة لبحثك</p>
+                        <p class="text-zinc-400 text-xs">جرب البحث بكلمة أخرى أو اختر "الكل" من الأقسام</p>
+                    </div>
+                `;
+            }
+        }
+
+        // وظائف التصفية والبحث
+        window.filterCategory = function(catId) {
+            currentCategory = catId;
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                if (btn.dataset.cat === catId) {
+                    btn.className = "cat-tab active shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gold text-black shadow-md transition";
+                } else {
+                    btn.className = "cat-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-gold/50 transition";
+                }
+            });
+            renderMenu();
+        };
+
+        window.handleSearch = function(val) {
+            searchQuery = val;
+            renderMenu();
+        };
+
+        // نسخ رابط الصفحة لمشاركته على فيسبوك
+        window.copyMenuLink = function() {
+            const url = window.location.href;
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast("تم نسخ رابط المنيو! يمكنك لصقه في صفحة فيسبوك");
+        };
+
+        // إدارة النوافذ المنبثقة
+        window.openLoginModal = function() {
+            document.getElementById('pin-input').value = '';
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => document.getElementById('pin-input').focus(), 100);
+        };
+
+        window.closeModal = function(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        // التحقق من كلمة مرور الإدارة (بدون كشف الكلمة الافتراضية)
+        window.handleAdminLogin = function(e) {
+            e.preventDefault();
+            const enteredPin = document.getElementById('pin-input').value.trim();
+            const currentPin = String(menuState.pin || "1234");
+            if (enteredPin === currentPin) {
+                isAdmin = true;
+                closeModal('login-modal');
+                document.getElementById('admin-toolbar').classList.remove('hidden');
+                document.getElementById('admin-login-trigger').classList.add('hidden');
+                renderMenu();
+                showToast("تم تسجيل الدخول إلى لوحة الإدارة بنجاح");
+            } else {
+                showToast("كلمة المرور غير صحيحة");
+                document.getElementById('pin-input').value = '';
+            }
+        };
+
+        window.logoutAdmin = function() {
+            isAdmin = false;
+            document.getElementById('admin-toolbar').classList.add('hidden');
+            document.getElementById('admin-login-trigger').classList.remove('hidden');
+            renderMenu();
+            showToast("تم الخروج من وضع الإدارة");
+        };
+
+        // تعبئة قائمة الأقسام الفرعية في نافذة الإضافة/التعديل
+        function populateSubcatSelect(selectedValue = '') {
+            const select = document.getElementById('item-subcat');
+            select.innerHTML = '';
+            menuState.categories.forEach(cat => {
+                cat.subcategories.forEach(sub => {
+                    const opt = document.createElement('option');
+                    opt.value = `${cat.id}::${sub.id}`;
+                    opt.textContent = `${cat.title} - ${sub.title}`;
+                    if (opt.value === selectedValue) opt.selected = true;
+                    select.appendChild(opt);
+                });
+            });
+        }
+
+        window.openAddItemModal = function() {
+            document.getElementById('item-modal-title').textContent = "إضافة صنف جديد";
+            document.getElementById('edit-item-id').value = '';
+            document.getElementById('item-name').value = '';
+            document.getElementById('item-price1').value = '';
+            document.getElementById('item-price2').value = '';
+            document.getElementById('item-available').checked = true;
+            populateSubcatSelect();
+            const modal = document.getElementById('item-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        window.openEditItemModal = function(catId, subId, itemId) {
+            const cat = menuState.categories.find(c => c.id === catId);
+            const sub = cat?.subcategories.find(s => s.id === subId);
+            const item = sub?.items.find(i => i.id === itemId);
+            if (!item) return;
+
+            document.getElementById('item-modal-title').textContent = "تعديل الصنف";
+            document.getElementById('edit-item-id').value = `${catId}::${subId}::${itemId}`;
+            populateSubcatSelect(`${catId}::${subId}`);
+            document.getElementById('item-name').value = item.name;
+            document.getElementById('item-price1').value = item.price1;
+            document.getElementById('item-price2').value = item.price2 !== null ? item.price2 : '';
+            document.getElementById('item-available').checked = item.available;
+
+            const modal = document.getElementById('item-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        window.saveMenuItem = async function(e) {
+            e.preventDefault();
+            const editCompoundId = document.getElementById('edit-item-id').value;
+            const [targetCatId, targetSubId] = document.getElementById('item-subcat').value.split('::');
+            const name = document.getElementById('item-name').value.trim();
+            const price1 = parseFloat(document.getElementById('item-price1').value);
+            const rawPrice2 = document.getElementById('item-price2').value.trim();
+            const price2 = rawPrice2 !== '' ? parseFloat(rawPrice2) : null;
+            const available = document.getElementById('item-available').checked;
+
+            // إذا كان تعديلاً لصنف موجود، نحذفه من موقعه القديم أولاً ثم نضيفه أو نحدثه
+            if (editCompoundId) {
+                const [oldCatId, oldSubId, oldItemId] = editCompoundId.split('::');
+                const oldCat = menuState.categories.find(c => c.id === oldCatId);
+                const oldSub = oldCat?.subcategories.find(s => s.id === oldSubId);
+                if (oldSub) {
+                    const idx = oldSub.items.findIndex(i => i.id === oldItemId);
+                    if (idx !== -1) {
+                        if (oldCatId === targetCatId && oldSubId === targetSubId) {
+                            oldSub.items[idx] = { id: oldItemId, name, price1, price2, available };
+                        } else {
+                            oldSub.items.splice(idx, 1);
+                            const newCat = menuState.categories.find(c => c.id === targetCatId);
+                            const newSub = newCat?.subcategories.find(s => s.id === targetSubId);
+                            newSub?.items.push({ id: oldItemId, name, price1, price2, available });
+                        }
+                    }
+                }
+            } else {
+                const targetCat = menuState.categories.find(c => c.id === targetCatId);
+                const targetSub = targetCat?.subcategories.find(s => s.id === targetSubId);
+                if (targetSub) {
+                    targetSub.items.push({
+                        id: 'item_' + Date.now(),
+                        name,
+                        price1,
+                        price2,
+                        available
+                    });
+                }
+            }
+
+            closeModal('item-modal');
+            await persistMenuState();
+        };
+
+        window.toggleItemAvailability = async function(catId, subId, itemId) {
+            const cat = menuState.categories.find(c => c.id === catId);
+            const sub = cat?.subcategories.find(s => s.id === subId);
+            const item = sub?.items.find(i => i.id === itemId);
+            if (item) {
+                item.available = !item.available;
+                await persistMenuState();
+            }
+        };
+
+        window.deleteMenuItem = async function(catId, subId, itemId) {
+            const cat = menuState.categories.find(c => c.id === catId);
+            const sub = cat?.subcategories.find(s => s.id === subId);
+            if (sub) {
+                sub.items = sub.items.filter(i => i.id !== itemId);
+                await persistMenuState();
+            }
+        };
+
+        window.openChangePinModal = function() {
+            document.getElementById('new-pin-input').value = '';
+            const modal = document.getElementById('pin-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        window.saveNewPin = async function(e) {
+            e.preventDefault();
+            const newPin = document.getElementById('new-pin-input').value.trim();
+            if (newPin.length >= 4) {
+                menuState.pin = newPin;
+                closeModal('pin-modal');
+                await persistMenuState();
+                showToast("تم تغيير كلمة مرور الإدارة وحفظها");
+            }
+        };
+
+        // عرض إشعار Toast
+        let toastTimer = null;
+        window.showToast = function(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3000);
+        };
+
+        // تشغيل المنيو عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu();
+            initCloudSync();
+        });
+    </script>
+</body>
+</html>
